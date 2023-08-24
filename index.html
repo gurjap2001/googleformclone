@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Forms Clone</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1dVYmTH5zQPdAa9fuKv3Fp8x5t3L6z5F5i2a5LCh5fGVH6twiOvxy6CpD1W7Inh3g" crossorigin="anonymous">
+    <style>
+        /* Custom CSS for the light purple background */
+        body {
+            background-color: #f0e6f2; 
+            font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;/* Light purple background color */
+        }
+        
+        /* Custom CSS for centered, expanded-width boxes */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .rounded-box {
+                width: 80%; /* Reduce the width for smaller screens */
+                padding: 16px; /* Adjust padding for smaller screens */
+            }}
+
+        .rounded-box {
+            margin-top: 12px;
+    background-color: #fff;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 24px;
+    padding-top: 22px;
+    position: relative;
+    max-width: 90vw;
+    width: 640px;
+        }
+        .form-label{
+            font-family:Roboto, Helvetica, Arial, sans-serif;
+        }
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-container input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #000; /* Color of the lines */
+        }
+        .textarea-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .textarea-container textarea {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+            border-bottom: 1px solid #000; /* Color of the lines */
+            resize: none; /* Prevent textarea resizing */
+        }
+        .textarea-container textarea::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 1px;
+            background-color: #000; /* Color of the line */
+            bottom: 0;
+            left: 0;
+            transform: translateY(100%);
+        }
+        .file-input {
+            display: none; /* Hide the file input */
+        }
+        .lable{
+            color: #1a73e8;
+            border:#c0c1c4 solid 1px;
+            border-radius:4px;
+            padding: 8px 15px 8px 11px;
+            width:80px
+        }
+
+        .custom-file-label::after {
+            content: "Add file";
+            display: inline-block;
+            color: #1a73e8;
+            font-size:14px;
+            font-weight:bold
+             /* Label text when no file is selected */
+        }
+        .rating-container {
+            display: flex;
+            align-items:center;
+            justify-content:space-between;
+    min-height: 3em;-webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap:10px 0px;
+        }
+
+        .grid-item {
+            display: flex;
+            align-items: center;
+            background-color:#eee;
+            padding:12px
+        }
+
+        .radio-label {
+            margin-right: 5px;
+        }
+
+        .radio-input {
+            margin-right: 5px;
+        }
+
+        .header {
+            font-weight: normal;
+        }
+        .line {
+            width:30%;
+            height: 8px; /* Adjust the line thickness as needed */
+            background-color: #379923; /* Line color */
+            border-radius: 4px; /* Border radius */
+        }
+        .yoy{
+            display:flex;
+            flex-direction: row;
+            justify-content:space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-6">
+            <form>
+                <div class="rounded-box">
+                    <div class="mb-3">
+                        <div style="border-top-left-radius: 8px;
+                        border-top-right-radius: 8px;
+                        height: 10px;
+                        left: -1px;
+                        position: absolute;
+                        top: -1px;
+                        width: calc(100% + 2px);background-color: rgb(103, 58, 183);
+    color: rgba(255, 255, 255, 1);"></div>
+                        <label for="input1" class="form-label"style="font-size: 24pt;letter-spacing: 0;line-height: 135%;">Assignment Task</label><br><hr style="width:688px;margin-left:-24px;color:#dadce0">
+                        <p style="font-size: 14px; color:#5F6368"><b>sainijappy01@gmail.com </b><a href="#">Switch account</a><br><br>
+The name and photo associated with your Google account will be recorded when you upload files and submit this form. Your email is not part of your response.</p>
+                    <hr style="width: 688px;margin-left:-24px;color:#dadce0">
+                    <p style="color:rgb(217,48,37);font-family: Roboto,Arial,sans-serif;
+                    font-size: 14px;
+                    font-weight: 400;
+                    letter-spacing: .2px;
+                    line-height: 20px;
+                    margin-top: 12px;margin-bottom:-12px">*Indicates required question</p></div>
+                </div>
+
+                <div class="rounded-box">
+                    <div class="mb-3">
+                        <label for="radioOptions" class="form-label">MCQ<span style="color:rgb(217,48,37)">*</span></label><br><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioOptions" id="option1" value="Option 1">
+                            <label class="form-check-label" for="option1">Option 1</label>
+                        </div><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioOptions" id="option2" value="Option 2">
+                            <label class="form-check-label" for="option2">Option 2</label>
+                        </div><br>
+                         <div class="form-check">
+                            <input class="form-check-input" type="radio" name="radioOptions" id="option3" value="Option 3">
+                            <label class="form-check-label" for="option3">Option 3</label>
+                        </div><br>
+                    </div>
+                </div>
+
+
+
+
+                <div class="rounded-box">
+                    <div class="mb-3">
+                        <label for="checkboxOptions" class="form-label">Checkbox<span style="color:rgb(217,48,37)">*</span></label><br><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Option 1" id="checkOption1"  style="border: 10px solid transparent;
+                            border-radius: 3px;">
+                            <label class="form-check-label" for="checkOption1">Option 1</label>
+                        </div><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Option 2" id="checkOption2">
+                            <label class="form-check-label" for="checkOption2" >Option 2</label>
+                        </div><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Option 3" id="checkOption3">
+                            <label class="form-check-label" for="checkOption3">Option 3</label>
+                        </div><br>
+                    </div>
+                </div>
+
+                <div class="rounded-box">
+                    <div class="mb-3">
+                        <label for="input2" class="form-label">Short Answer<span style="color:rgb(217,48,37)">*</span></label><br><br>
+                        <div class="input-container"><input type="text" class="form-control" id="input2" placeholder="Your answer"></div>
+                    </div>
+                </div>
+
+                <div class="rounded-box">
+                    <div class="mb-3">
+                        <label for="textarea1" class="form-label">ParaGraph<span style="color:rgb(217,48,37)">*</span></label><br>
+                       <br> <div class="textarea-container"><textarea placeholder="Your answer"></textarea></div>
+                    </div>
+                </div>
+
+
+                <div class="rounded-box">
+                    <div class="mb-3">
+                <div class="form-group">
+                <label class="form-label">Dropdown<span style="color:rgb(217,48,37)">*</span></label><br><br>
+        <div class="dropdown-container">
+            <select style="height: auto;
+            padding-bottom: 8px;
+            padding-top: 8px;font-family: Roboto,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .2px;
+    line-height:15pt;border-color:rgb(212, 208, 208);
+    max-width: 380px;
+    min-width: 112px;
+    padding-right: 62px;
+    padding-top:12px;
+    padding-bottom:12px;
+    color: #201f1f;
+    outline: none;
+    overflow: hidden;
+    padding-left: 18px;
+    position: relative;
+    text-align: left;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;margin-right: 50px;">
+                <option value="" style="padding-right: 12px;">Choose</option>
+                <option value="option1"style="padding-right: 12px;line-height:15pt">Option 1</option>
+                <option value="option2"style="padding-right: 12px;line-height:15pt">Option 2</option>
+                <option value="option3"style="padding-right: 12px;line-height:15pt">Option 3</option>
+            </select></div></div></div></div>
+
+                <div class="rounded-box">
+                    <div class="mb-3">
+                <div class="form-group">
+                    <label for="radioOptions" class="form-label">File Upload<span style="color:rgb(217,48,37)">*</span></label><br><br>
+                    <div class="lable">
+                    <span class="file-upload-icon" style="color:#1a73e8"><i class="fas fa-upload" style="margin-right:10px"></i><label class="custom-file-label" for="fileInput"></label>
+                    <input type="file" class="form-control-file file-input" id="fileInput"></div>
+                  </div> </div>
+                </div>
+
+                <div class="rounded-box">
+                    <div class="mb-3">
+                <div class="form-group">
+                    <label class="form-label">Linear Scale<span style="color:rgb(217,48,37)">*</span></label><br><br>
+                    <div class="rating-container">
+                        <div>Worst</div> 
+                        <input type="radio" class="radio-input" name="rating" " id="rating1" value="1">
+                        <label class="radio-label" for="rating1"></label>
+            
+                        
+                        <input type="radio" class="radio-input" name="rating" id="rating2" value="2">
+                        <label class="radio-label" for="rating2"></label>
+            
+                        
+                        <input type="radio" class="radio-input" name="rating" id="rating3" value="3">
+                        <label class="radio-label" for="rating3"></label>
+            
+                        
+                        <input type="radio" class="radio-input" name="rating"id="rating4" value="4">
+                        <label class="radio-label" for="rating4"></label>
+            
+                        
+                        <input type="radio" class="radio-input" name="rating"id="rating5" value="5">
+                        <label class="radio-label" for="rating5"></label>
+                        <div>Best</div>
+                    </div>
+                    </div></div></div>
+               
+
+                    <div class="rounded-box">
+                        <div class="mb-3">
+                    <div class="form-group"><label class="form-label">Multiple Choice Grid<span style="color:rgb(217,48,37)">*</span></label><br><br>
+                        <div class="grid-container">
+                            <!-- Headers -->
+                            <div class="header"> </div> <!-- Empty cell -->
+                            <div class="header">Column 1</div>
+                            <div class="header">Column 2</div>
+                            <div class="header">Column 3</div>
+                            
+                            <!-- Row 1 -->
+                            <div class="grid-item">Row 1</div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row1" id="choice1_1" value="1">
+                            </div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row1" id="choice1_2" value="2">
+                            </div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row1" id="choice1_3" value="3">
+                            </div>
+                
+                            <!-- Row 2 -->
+                            <div class="grid-item">Row 2</div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row2" id="choice2_1" value="1">
+                            </div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row2" id="choice2_2" value="2">
+                            </div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row2" id="choice2_3" value="3">
+                            </div>
+                
+                            <!-- Row 3 -->
+                            <div class="grid-item">Row 3</div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row3" id="choice3_1" value="1">
+                            </div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row3" id="choice3_2" value="2">
+                            </div>
+                            <div class="grid-item">
+                                <input type="radio" class="radio-input" name="row3" id="choice3_3" value="3">
+                            </div>
+                        </div></div></div></div>
+
+
+
+                        <div class="rounded-box">
+                            <div class="mb-3">
+                        <div class="form-group"><label class="form-label">Checkbox Grid<span style="color:rgb(217,48,37)">*</span></label><br><br>
+                        <div class="grid-container">
+                            <!-- Headers -->
+                            <div class="header"> </div> <!-- Empty cell -->
+                            <div class="header">Column 1</div>
+                            <div class="header">Column 2</div>
+                            <div class="header">Column 3</div>
+                            
+                            <!-- Row 1 -->
+                            <div class="grid-item header">Row 1</div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row1col1" id="checkbox1_1">
+                            </div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row1col2" id="checkbox1_2">
+                            </div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row1col3" id="checkbox1_3">
+                            </div>
+                
+                            <!-- Row 2 -->
+                            <div class="grid-item header">Row 2</div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row2col1" id="checkbox2_1">
+                            </div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row2col2" id="checkbox2_2">
+                            </div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row2col3" id="checkbox2_3">
+                            </div>
+                
+                            <!-- Row 3 -->
+                            <div class="grid-item header">Row 3</div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row3col1" id="checkbox3_1">
+                            </div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row3col2" id="checkbox3_2">
+                            </div>
+                            <div class="grid-item">
+                                <input type="checkbox" class="checkbox-input" name="row3col3" id="checkbox3_3">
+                            </div>
+                        </div></div></div></div>
+
+    
+                 <div class="yoy">
+                <button type="submit" class="btn btn-primary rounded d-block mx-auto" style="font-family: Google Sans,Roboto,Arial,sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: .25px;background: #5206b5;color: #fff;padding:10px 22px 10px 22px;border-radius:4px;border:none">Submit</button>
+            <div class="line-container"></div>
+            <div class="line"></div><p style="font-size:14px">Page 1 of 1</p><a href="#" style="font-size:14px;text-decoration: none;color:#1a73e8;font-weight: 600;">Clear Form</a></div>
+            <br><br>
+            <div style="font-size:12px">Never submit passwords through Google Forms.</div><br>
+            <center style="font-size:12px">This content is neither created nor endorsed by Google. Report Abuse - Terms of Service - Privacy Policy</center></div></div>
+            
+            <center style="font-size:24px;color:#5F6368;font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;margin-top:20px;margin-bottom:30px">Google <b> Forms</b></center>
+            
+        </form>
+        
+        </div>
+       
+    </div>
+  
+    <!-- Add Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+ZTIx0fzoFkL6b5f5Md5Mz8KCfF5n4lE5EmJPA5Fw5c7fYlN" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-e7FmzLm5u5G5ZiBc7A5kds5EN8HCp+P5SL7Fv9w5u7r5F5qF5l5u5P5S5P5x5S5" crossorigin="anonymous"></script>
+</body>
+</html>
